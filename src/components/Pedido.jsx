@@ -35,6 +35,25 @@ const Pedido = () => {
 
     }
 
+    const produtosDisponiveis = items.filter(item=>item.disponivel);
+    const carrinho = items.filter(item=>item.quantidade>0);
+    //REDUCE
+    const subtotal = carrinho.reduce((ac,item)=> ac + item.preço * item.quantidade,0)
+    const total = subtotal > 0 ? subtotal + taxaEntrega :0;
+
+    // SIMULAÇÃO DO CICLO DE VIDA DA ENTREGA USANDO TEMPORIZADORES ASSINtidos
+    const confirmarPedido=()=>{
+        setEnviar(true);
+        setStatus("restaurante preparando seu pedido...");
+        setTimeout(()=>{
+            setStatus("Seu pedido saiu para a entrega")
+            setEnviar(false)
+        },5000);
+        setTimeout(()=>{
+            setStatus("seu pedido foi entregue com sucesso")
+            setEnviar(false)
+        },10000)
+    }
 
 
     
